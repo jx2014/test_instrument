@@ -1,0 +1,53 @@
+{
+  "equipment": [
+    {
+      "equipment_name": "dc_supply",
+      "equipment_type": "dc_power_supply",
+      "equipment_model": "AgilentE3648A",
+      "equipment_class_name": "E3648A",
+      "equipment_address": "GPIB0::6::INSTR",
+      "connection_type": "gpib"
+    },
+    {
+      "equipment_name": "dc_supply2",
+      "equipment_type": "dc_power_supply",
+      "equipment_model": "KoradKA3005P",
+      "equipment_class_name": "KA3005P",
+      "equipment_address": "ASRL3::INSTR",
+      "connection_type": "serial",
+      "serial_baud_rate": 9600
+    },
+    {
+      "equipment_name": "scope",
+      "equipment_type": "oscilloscope",
+      "equipment_model": "AgilentDSO5054A",
+      "equipment_class_name": "DSO5054A",
+      "equipment_address": "GPIB0::12::INSTR",
+      "connection_type": "gpib"
+    },
+    {
+      "equipment_name": "signal_generator",
+      "equipment_type": "signal_generator",
+      "equipment_model": "UniTUTG962E",
+      "equipment_class_name": "UTG962E",
+      "equipment_address": "USB0::0x6656::0x0834::AWG2613530802::INSTR",
+      "connection_type": "usb"
+    },
+    {
+      "equipment_name": "dc_load",
+      "equipment_type": "dc_load",
+      "equipment_model": "KuaiquKDL8410",
+      "equipment_class_name": "KDL8410",
+      "equipment_address": "TCPIP0::192.168.1.100::INSTR",
+      "connection_type": "tcpip"
+    },
+    {
+      "equipment_name": "dmm",
+      "equipment_type": "dmm",
+      "equipment_model": "Agilent34405A",
+      "equipment_class_name": "DMM34405A",
+      "equipment_address": "USB0::0x0957::0x0618::MY32120071::INSTR",
+      "connection_type": "usb"
+    }
+  ]
+}
