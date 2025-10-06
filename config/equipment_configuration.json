@@ -1,0 +1,24 @@
+{
+  "equipment": [
+    {
+      "equipment_name": "dc_supply",
+      "equipment_type": "dc_power_supply",
+      "equipment_model": "AgilentE3648A",
+      "equipment_address": "GPIB0::5::INSTR",
+      "connection_type": "gpib"
+    },
+    {
+      "equipment_name": "dc_supply2",
+      "equipment_type": "dc_power_supply",
+      "equipment_model": "Korad",
+      "equipment_address": "ASRL3::INSTR",
+      "connection_type": "serial"
+    },
+    {
+      "equipment_name": "scope",
+      "equipment_type": "oscilloscope",
+      "equipment_model": "AgilentDSO5054A",
+      "equipment_address": "TCPIP0::192.168.1.100::INSTR",
+      "connection_type": "tcpip"
+    }
+  ]

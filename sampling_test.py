@@ -4,14 +4,14 @@ import matplotlib.pyplot as plt
 # total plotting points for high speed sampling waveform.
 # plot_points = 1000
 
-f = 600
-cycles = 10
+f = 210
+cycles = 1000
 total_time_interval = cycles / f
 
 # Ts_hi is high speed sampling period
 # Ts_hi = total_time_interval /  (plot_points - 1)
 # Fs_hi = 1 / Ts_hi
-Fs_hi = 1000
+Fs_hi = 150
 Ts_hi = 1 / Fs_hi
 plot_points = int(Fs_hi / f * cycles)
 print(f"High sampling period: {Ts_hi*1000000}us, sampling frequency {Fs_hi/1000} KHz, plot points: {plot_points} points")
@@ -31,11 +31,14 @@ if len(y) < len(t):
 
 # pulse train
 f_pulse = 1000
-a = np.round(Fs_hi / f_pulse)
-y_pulse = [0] * len(t)
-for i, n in enumerate(t):
-    if i % a == 0:
-        y_pulse[i] = 1
+a = int(np.round(Fs_hi / f_pulse))
+if a == 0:
+    y_pulse = [1] * len(t)
+else:
+    y_pulse = [0] * len(t)
+    for i, n in enumerate(t):
+        if i % a == 0:
+            y_pulse[i] = 1
 
 # sampled by pulse train
 Ys = [0] * len(t)
