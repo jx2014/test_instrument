@@ -1,0 +1,10 @@
+from .dc_power_supply_template import DCPowerSupplyTemplate
+
+
+class DMM34405A(DCPowerSupplyTemplate):
+    def __init__(self, equipment_config):
+        super().__init__(equipment_config)
+        self.name = "Agilent 34405A"
+
+    def get_voltage(self):
+        return float(self.query(f"MEAS:VOLT? CH{self.channel}"))
