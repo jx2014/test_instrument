@@ -1,3 +1,4 @@
+import time
 from .dc_power_supply_template import DCPowerSupplyTemplate
 
 
@@ -18,14 +19,21 @@ class KA3005P(DCPowerSupplyTemplate):
 
     def read(self):
         response = self.read_raw()
-        return response.rstrip(b'\x00').decode()
+        return response.rstrip('\x00')
 
     def write(self, cmd):
         self.write_raw(cmd)
+        time.sleep(1)
 
     def query(self, command):
         response = self.query_raw(command)
-        return response.rstrip(b'\x00').decode()
+        return response.rstrip('\x00')
+
+    def get_voltage_set_point(self, channel=None):
+        return float(self.query(f"VSET1?"))
+
+    def get_current_set_point(self, channel=None):
+        return float(self.query(f"ISET1?"))
 
     def get_voltage(self):
         # Korad specific command

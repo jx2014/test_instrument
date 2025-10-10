@@ -1,7 +1,9 @@
 import pyvisa
+import time
 import json
 import os
 from logger import get_logger
+from pyvisa.constants import VI_WRITE_BUF_DISCARD, VI_READ_BUF_DISCARD
 
 class TestEquipmentTemplate():
     def __init__(self, equipment_config, **kwargs):
@@ -47,6 +49,8 @@ class TestEquipmentTemplate():
 
     def write(self, command):
         if self.is_connected and self.instrument:
+            if 'serialinstrument' in repr(self.instrument).lower() and self.instrument.bytes_in_buffer != 0:
+                self.instrument.flush(VI_READ_BUF_DISCARD | VI_WRITE_BUF_DISCARD)
             self.instrument.write(command)
         elif not self.optional:
             raise ConnectionError(f"Not connected to {self.equipment_name}")
@@ -63,6 +67,8 @@ class TestEquipmentTemplate():
 
     def query(self, command):
         if self.is_connected and self.instrument:
+            if 'serialinstrument' in repr(self.instrument).lower() and self.instrument.bytes_in_buffer != 0:
+                self.instrument.flush(VI_READ_BUF_DISCARD | VI_WRITE_BUF_DISCARD)
             return self.instrument.query(command)
         elif not self.optional:
             raise ConnectionError(f"Not connected to {self.equipment_name}")
@@ -80,6 +86,8 @@ class TestEquipmentTemplate():
 
     def write_raw(self, command):
         if self.is_connected and self.instrument:
+            if 'serialinstrument' in repr(self.instrument).lower() and self.instrument.bytes_in_buffer != 0:
+                self.instrument.flush(VI_READ_BUF_DISCARD | VI_WRITE_BUF_DISCARD)
             self.instrument.write_raw(command.encode())
         elif not self.optional:
             raise ConnectionError(f"Not connected to {self.equipment_name}")
@@ -88,7 +96,12 @@ class TestEquipmentTemplate():
 
     def read_raw(self):
         if self.is_connected and self.instrument:
-            bytes_to_read = self.instrument.bytes_in_buffers
+            bytes_to_read = -1
+            retries = 100
+            while bytes_to_read != self.instrument.bytes_in_buffer and retries > 0:
+                retries -= 1
+                bytes_to_read = self.instrument.bytes_in_buffer
+                time.sleep(0.05)
             return self.instrument.read_bytes(bytes_to_read).decode()
         elif not self.optional:
             raise ConnectionError(f"Not connected to {self.equipment_name}")

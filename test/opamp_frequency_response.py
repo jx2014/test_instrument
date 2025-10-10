@@ -22,4 +22,6 @@ class OpampFrequencyResponse(TestTemplate):
         self.sig_gen = self.eq.equipment['sig_gen']
 
         self.dc_supply.set_voltage(3.1, 2)
+        self.dc_supply2.query("*IDN?")
+
         print('asdf')
