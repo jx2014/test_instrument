@@ -6,10 +6,20 @@
     output phase shift, gain (linear), gain (dB).
 """
 
+from .test_template import TestTemplate
 import sys
 
-class OpampFrequencyResponse:
+class OpampFrequencyResponse(TestTemplate):
     def __init__(self, **kwargs):
-        equipment_manager = kwargs.get("equipment_manager", None)
-        if equipment_manager is None:
-            sys.exit("No equipment found, exit program.")
+        self.required_equipment = ['dc_supply',
+                                   'dc_supply2',
+                                   'scope',
+                                   'sig_gen']
+        super().__init__(**kwargs)
+        self.dc_supply = self.eq.equipment['dc_supply']
+        self.dc_supply2 = self.eq.equipment['dc_supply2']
+        self.scope = self.eq.equipment['scope']
+        self.sig_gen = self.eq.equipment['sig_gen']
+
+        self.dc_supply.set_voltage(3.1, 2)
+        print('asdf')

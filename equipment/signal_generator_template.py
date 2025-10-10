@@ -1,4 +1,4 @@
-from test_equipment_template import TestEquipmentTemplate
+from .test_equipment_template import TestEquipmentTemplate
 
 
 class SignalGeneratorTemplate(TestEquipmentTemplate):
