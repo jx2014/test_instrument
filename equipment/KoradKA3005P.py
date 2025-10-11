@@ -29,10 +29,10 @@ class KA3005P(DCPowerSupplyTemplate):
         response = self.query_raw(command)
         return response.rstrip('\x00')
 
-    def get_voltage_set_point(self, channel=None):
+    def get_voltage_limit(self, channel=None):
         return float(self.query(f"VSET1?"))
 
-    def get_current_set_point(self, channel=None):
+    def get_current_limit(self, channel=None):
         return float(self.query(f"ISET1?"))
 
     def get_voltage(self):

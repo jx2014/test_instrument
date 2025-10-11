@@ -39,11 +39,11 @@ class E3648A(DCPowerSupplyTemplate):
         return self.query("INST?").strip()
 
     @channel_selector
-    def get_voltage_set_point(self, channel=None):
+    def get_voltage_limit(self, channel=None):
         return float(self.query(f"VOLT?"))
 
     @channel_selector
-    def get_current_set_point(self, channel=None):
+    def get_current_limit(self, channel=None):
         return float(self.query(f"CURR?"))
 
     @channel_selector
