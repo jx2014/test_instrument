@@ -54,3 +54,10 @@ class KA3005P(DCPowerSupplyTemplate):
 
     def turn_off(self):
         self.write("OUT0")
+
+    def set_output(self, voltage, current):
+        self.set_voltage(voltage)
+        self.set_current(current)
+
+    def tear_down(self):
+        pass

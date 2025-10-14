@@ -37,11 +37,16 @@ class TestEquipmentTemplate():
             return True
 
         except Exception as e:
-            self.logger.error(f"Failed to connect to {self.equipment_name} at {self.address}: {e}")
+            self.logger.error(f"Failed to connect to {self.name} at {self.address}: {e}")
             self.is_connected = False
             return False
 
+    def tear_down(self):
+        self.logger.error(f"tear_down function not found in {self.equipment_model} at {self.address}")
+        raise NotImplementedError("tear_down must be implemented in child class")
+
     def disconnect(self):
+        self.tear_down()
         if self.instrument:
             self.instrument.close()
             self.is_connected = False

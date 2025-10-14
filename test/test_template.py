@@ -1,4 +1,5 @@
 import sys
+from logger import get_logger
 
 class TestTemplate:
      def __init__(self, **kwargs):
@@ -7,7 +8,10 @@ class TestTemplate:
              sys.exit("No equipment found, exit program.")
          if not hasattr(self, 'required_equipment'):
             self.required_equipment = []
+         if not hasattr(self, 'test_name'):
+            self.test_name = "UnknownTestName"
          self._connected_equipment = []
+         self.logger = get_logger(f"test.{self.test_name}")
          self.setup()
 
      def setup(self):

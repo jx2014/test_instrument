@@ -6,10 +6,10 @@ class SignalGeneratorTemplate(TestEquipmentTemplate):
         super().__init__(equipment_config)
         self.channel = equipment_config.get('channel', 1)
 
-    def set_output_on(self, ch):
+    def turn_on(self, ch):
         raise NotImplementedError("set_output_on must be implemented in child class")
 
-    def set_output_off(self, ch):
+    def turn_off(self, ch):
         raise NotImplementedError("set_output_on must be implemented in child class")
 
     def get_frequency(self, ch):
@@ -48,17 +48,17 @@ class SignalGeneratorTemplate(TestEquipmentTemplate):
     def set_phase(self, ch, phase):
         raise NotImplementedError("set_phase must be implemented in child class")
 
-    def get_load(self, ch):
+    def get_output_impedance(self, ch):
         raise NotImplementedError("get_load must be implemented in child class")
 
-    def set_load_high_z(self, ch):
-        raise NotImplementedError("set_load_high_z must be implemented in child class")
+    def set_output_impedance_high_z(self, ch):
+        raise NotImplementedError("set_output_impedance_high_z must be implemented in child class")
 
-    def set_load_50ohm(self, ch):
-        raise NotImplementedError("set_load_50ohm must be implemented in child class")
+    def set_output_impedance_50ohm(self, ch):
+        raise NotImplementedError("set_output_impedance_50ohm must be implemented in child class")
 
-    def set_load_75ohm(self, ch):
-        raise NotImplementedError("set_load_75ohm must be implemented in child class")
+    def set_output_impedance_75ohm(self, ch):
+        raise NotImplementedError("set_output_impedance_75ohm must be implemented in child class")
 
     def get_waveform_type(self, ch):
         raise NotImplementedError("get_waveform_type must be implemented in child class")
@@ -104,4 +104,5 @@ class SignalGeneratorTemplate(TestEquipmentTemplate):
 
     def set_local(self):
         raise NotImplementedError("set_local must be implemented in child class")
+
 

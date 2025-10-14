@@ -6,23 +6,23 @@ class UTG962E(SignalGeneratorTemplate):
         super().__init__(equipment_config)
         self.name = "Uni-T UTG962E"
 
-    def set_output_on(self, ch=1):
+    def turn_on(self, ch=1):
         self.write(f":CHANnel{ch}:OUTPut ON")
 
-    def set_output_off(self, ch=1):
+    def turn_off(self, ch=1):
         self.write(f":CHANnel{ch}:OUTPut OFF")
 
     def get_frequency(self, ch=1):
         return float(self.query(f":CHANnel{ch}:BASE:FREQuency?"))
 
-    def set_frequency(self, ch=1, value=1000):
-        self.write(f":CHANnel{ch}:BASE:FREQuency {value}")
+    def set_frequency(self, ch=1, freq=1000):
+        self.write(f":CHANnel{ch}:BASE:FREQuency {freq}")
 
     def get_period(self, ch=1):
         return float(self.query(f":CHANnel{ch}:BASE:PERiod?"))
 
-    def set_period(self, ch=1, value=0.001):
-        self.write(f":CHANnel{ch}:BASE:PERiod {value}")
+    def set_period(self, ch=1, period=0.001):
+        self.write(f":CHANnel{ch}:BASE:PERiod {period}")
 
     def get_duty_cycle(self, ch=1):
         return float(self.query(f":CHANnel{ch}:BASE:DUTY?"))
@@ -48,16 +48,16 @@ class UTG962E(SignalGeneratorTemplate):
     def set_phase(self, ch=1, phase=0):
         return self.write(f":CHANnel{ch}:BASE:PHASe {phase}")
 
-    def get_load(self, ch=1):
+    def get_output_impedance(self, ch=1):
         return float(self.query(f":CHANnel{ch}:LOAD?"))
 
-    def set_load_high_z(self, ch=1):
+    def set_output_impedance_high_z(self, ch=1):
         self.write(f":CHANnel{ch}:LOAD 10000")
 
-    def set_load_50ohm(self, ch=1):
+    def set_output_impedance_50ohm(self, ch=1):
         self.write(f":CHANnel{ch}:LOAD 50")
 
-    def set_load_75ohm(self, ch=1):
+    def set_output_impedance_75ohm(self, ch=1):
         self.write(f":CHANnel{ch}:LOAD 75")
 
     def get_waveform_type(self, ch=1):
@@ -188,3 +188,7 @@ class UTG962E(SignalGeneratorTemplate):
 
     def set_modulate_signal_frequency(self, ch=1, freq=100):
         self.write(f":CHANnel{ch}:MODulate:FREQuency {freq}")
+
+    def tear_down(self):
+        self.turn_off(1)
+        self.turn_off(2)

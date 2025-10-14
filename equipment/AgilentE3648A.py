@@ -79,3 +79,6 @@ class E3648A(DCPowerSupplyTemplate):
             print(error_msg)
             if '+0,"No error"' in error_msg:
                 break
+
+    def tear_down(self):
+        pass

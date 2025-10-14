@@ -7,24 +7,12 @@ from logger import get_logger
 
 def main():
     eq_manager = EquipmentManager("config/equipment_configuration.json")
-    setup_logging(level=logging.DEBUG)
+    setup_logging(level=logging.INFO)
     logger = get_logger("main")
     logger.info("Starting test automation")
-    OpampFrequencyResponse(equipment_manager=eq_manager)
-
-    # Use equipment by name (as defined in JSON)
+    test = OpampFrequencyResponse(equipment_manager=eq_manager)
     try:
-        # These names come from equipment_name in JSON
-        eq_manager.dc_supply.set_voltage(5.0)
-        eq_manager.dc_supply.turn_on()
-
-        eq_manager.dc_supply2.set_voltage(3.3)
-        eq_manager.dc_supply2.turn_on()
-
-        # Or access via dictionary
-        voltage = eq_manager['dc_supply'].get_voltage()
-        print(f"DC Supply Voltage: {voltage}V")
-
+        test.run_test()
     except Exception as e:
         print(f"Test error: {e}")
 

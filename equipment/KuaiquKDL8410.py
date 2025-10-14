@@ -6,3 +6,5 @@ class KDL8410(DCLoadTemplate):
         super().__init__(equipment_config)
         self.name = "Kuaiqu KDL8410"
 
+    def tear_down(self):
+        pass

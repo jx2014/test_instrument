@@ -42,5 +42,8 @@ class DCPowerSupplyTemplate(TestEquipmentTemplate):
         """Turn output off - override in specific models"""
         raise NotImplementedError("turn_off must be implemented in child class")
 
+    def set_output(self, voltage, current):
+        raise NotImplementedError("set_output must be implemented in child class")
+
     def get_system_error(self):
         raise NotImplementedError("get_system_error must be implemented in child class")

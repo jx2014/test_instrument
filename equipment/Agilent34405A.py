@@ -8,3 +8,6 @@ class DMM34405A(DCPowerSupplyTemplate):
 
     def get_voltage(self):
         return float(self.query(f"MEAS:VOLT? CH{self.channel}"))
+
+    def tear_down(self):
+        pass
