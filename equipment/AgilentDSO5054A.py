@@ -133,8 +133,20 @@ class DSO5054A(OscilloscopeTemplate):
     def get_vaverage(self, ch):
         return float(self.query(f":MEASure:VAVerage? CHANnel{ch}"))
 
-    def get_screenshot(self):
-        raise NotImplementedError("get_screenshot must be implemented in child class")
+    def get_screenshot(self, file_name="scope_0", ink_saver=True, palette=0):
+        self.write(":SAVE:IMAGE:FACTORS ON")  # default is off
+        inks = 1 if ink_saver else 0
+        self.write(f":SAVE:IMAGE:INKSaver {inks}")
+        pallet = "COLor" if palette == 0 else "GRAYscale" if palette == 1 else "MONochrome"
+        self.write(f":DISPLAY:DATA? PNG, SCREEN, {pallet}")
+        screenshot = self.instrument.read_raw()
+        self.query("*opc?")
+        with open(file_name+".png", "wb") as f:
+            f.write(screenshot[10:])
+        return True
+
+
+
 
     def get_time_base_mode(self):
         return self.query(":TIMebase:MODE?")
