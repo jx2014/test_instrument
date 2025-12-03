@@ -145,9 +145,6 @@ class DSO5054A(OscilloscopeTemplate):
             f.write(screenshot[10:])
         return True
 
-
-
-
     def get_time_base_mode(self):
         return self.query(":TIMebase:MODE?")
 
