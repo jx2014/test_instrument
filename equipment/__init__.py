@@ -7,6 +7,7 @@ from .AgilentE3648A import E3648A
 from .KoradKA3005P import KA3005P
 from .KuaiquKDL8410 import KDL8410
 from .UniTUTG962E import UTG962E
+from .Fluke289 import Fluke289
 
 __all__ = [
     'TestEquipmentTemplate',
@@ -15,7 +16,8 @@ __all__ = [
     'AgilentE3648A',
     'KoradKA3005P',
     'KuaiquKDL8410',
-    'UniTUTG962E'
+    'UniTUTG962E',
+    'Fluke289'
 ]
 
 __version__ = '1.0.0'
