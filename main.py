@@ -1,8 +1,6 @@
 from equipment.equipment_manager import EquipmentManager
 import argparse
 import importlib
-# from test.opamp_frequency_response import OpampFrequencyResponse
-# from test.instrument_test import InstrumentTest
 import logging
 from logger import setup_logging
 from logger import get_logger
@@ -10,7 +8,9 @@ from logger import get_logger
 TEST_MAP = {
     "instrument_test": ("test.instrument_test", "InstrumentTest"),
     "opamp_frequency_response": ("test.opamp_frequency_response", "OpampFrequencyResponse"),
-    "default_test": ("test.instrument_test", "InstrumentTest")
+    "generic_frequency_response": ("test.generic_frequency_response", "GenericFrequencyResponse"),
+    "get_temperature": ("test.get_temperature", "GetTemperature"),
+    "default_test": ("test.instrument_test", "InstrumentTest"),
 }
 
 def print_available_tests():
