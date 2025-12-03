@@ -14,7 +14,7 @@ class TestEquipmentTemplate():
         self.equipment_model = equipment_config.get('equipment_model', 'unknown')
         self.address = equipment_config.get('equipment_address', '')
         self.connection_type = equipment_config.get('connection_type', 'unknown')
-        self.optional = equipment_config.get('optional', False)
+        self.optional = equipment_config.get('optional', True)
         self.resource_manager = None
         self.instrument = None
         self.is_connected = False
@@ -56,6 +56,7 @@ class TestEquipmentTemplate():
         if self.is_connected and self.instrument:
             if 'serialinstrument' in repr(self.instrument).lower() and self.instrument.bytes_in_buffer != 0:
                 self.instrument.flush(VI_READ_BUF_DISCARD | VI_WRITE_BUF_DISCARD)
+            self.logger.debug(f"{self.equipment_name} write: {command}")
             self.instrument.write(command)
         elif not self.optional:
             raise ConnectionError(f"Not connected to {self.equipment_name}")
@@ -64,7 +65,9 @@ class TestEquipmentTemplate():
 
     def read(self):
         if self.is_connected and self.instrument:
-            return self.instrument.read()
+            result =  self.instrument.read()
+            self.logger.debug(f"{self.equipment_name} read: {result}")
+            return result
         elif not self.optional:
             raise ConnectionError(f"Not connected to {self.equipment_name}")
         else:
@@ -74,6 +77,7 @@ class TestEquipmentTemplate():
         if self.is_connected and self.instrument:
             if 'serialinstrument' in repr(self.instrument).lower() and self.instrument.bytes_in_buffer != 0:
                 self.instrument.flush(VI_READ_BUF_DISCARD | VI_WRITE_BUF_DISCARD)
+            self.logger.debug(f"{self.equipment_name} query command: {command}")
             return self.instrument.query(command)
         elif not self.optional:
             raise ConnectionError(f"Not connected to {self.equipment_name}")
@@ -83,6 +87,7 @@ class TestEquipmentTemplate():
     def query_raw(self, command):
         if self.is_connected and self.instrument:
             self.write_raw(command)
+            self.logger.debug(f"{self.equipment_name} query command: {command}")
             return self.read_raw()
         elif not self.optional:
             raise ConnectionError(f"Not connected to {self.equipment_name}")
@@ -94,6 +99,7 @@ class TestEquipmentTemplate():
             if 'serialinstrument' in repr(self.instrument).lower() and self.instrument.bytes_in_buffer != 0:
                 self.instrument.flush(VI_READ_BUF_DISCARD | VI_WRITE_BUF_DISCARD)
             self.instrument.write_raw(command.encode())
+            self.logger.debug(f"{self.equipment_name} read_raw command: {command}")
         elif not self.optional:
             raise ConnectionError(f"Not connected to {self.equipment_name}")
         else:
