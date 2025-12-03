@@ -60,4 +60,4 @@ class KA3005P(DCPowerSupplyTemplate):
         self.set_current(current)
 
     def tear_down(self):
-        pass
+        self.turn_off()
