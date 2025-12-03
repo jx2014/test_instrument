@@ -1,7 +1,7 @@
-from .dc_power_supply_template import DCPowerSupplyTemplate
+from .multimeter_template import MultiMeterTemplate
 
 
-class DMM34405A(DCPowerSupplyTemplate):
+class DMM34405A(MultiMeterTemplate):
     def __init__(self, equipment_config):
         super().__init__(equipment_config)
         self.name = "Agilent 34405A"
